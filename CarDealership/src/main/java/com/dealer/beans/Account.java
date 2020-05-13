@@ -1,18 +1,18 @@
 package com.dealer.beans;
 
 public class Account {
-	
 	String username;
 	int cID;
 	int accountNum;
 	int balance;
 	double monthlyDue;
 	int terms;
+	
 	public Account() {
 		super();
-		// TODO Auto-generated constructor stub
+	
 	}
-	public Account(int cID, String username, int accountNum, int balance, double monthlyDue, int terms) {
+	public Account( int cID, int accountNum, String username, int balance, int terms, double monthlyDue) {
 		super();
 		this.cID = cID;
 		this.username = username;
@@ -22,11 +22,8 @@ public class Account {
 		this.terms = terms;
 	}
 
-	public Account(int int1, int int2, int int3, int int4, String string, String string2, String string3) {
-		// TODO Auto-generated constructor stub
-	}
-	
-	
+
+
 	public int getcID() {
 		return cID;
 	}
@@ -65,10 +62,9 @@ public class Account {
 	}
 	@Override
 	public String toString() {
-		return "Account [username=" + username + ", accountNum=" + accountNum + ", balance=" + balance + ", monthlyDue="
-				+ monthlyDue + ", terms=" + terms + "]";
+		return "Account [username=" + username + ", cID=" + cID + ", accountNum=" + accountNum + ", balance=" + balance
+				+ ", monthlyDue=" + monthlyDue + ", terms=" + terms + "]";
 	}
 	
 	
-
 }

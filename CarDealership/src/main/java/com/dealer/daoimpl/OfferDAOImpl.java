@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dealer.beans.Customer;
 import com.dealer.beans.Offer;
 import com.dealer.dao.OfferDAO;
 import com.dealer.util.ConnDatabase;
@@ -54,8 +55,8 @@ public class OfferDAOImpl implements OfferDAO {
 		return viewofferList;
 	}
 	
-	public List<Offer>viewCOfferList(String C_UNAME ) throws SQLException{
-		List<Offer> viewCOfferList = new ArrayList<Offer>();
+	public List<Offer>viewCOfferList(Customer customer) throws SQLException{
+		List<Offer> viewofferList = new ArrayList<Offer>();
 		Connection conn = cd.getConnection();
 		Statement stmt = conn.createStatement();
 		ResultSet rs = stmt.executeQuery("SELECT * FROM OFFER, CAR_TYPE WHERE  O_UNAME = '" + C_UNAME+ "' AND CAR_TYPE_ID = O_CAR_ID");

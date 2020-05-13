@@ -3,10 +3,9 @@ package com.dealer.menu;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.dealer.beans.NewCustomer;
 import com.dealer.daoimpl.CarDAOImpl;
 
-public class Menu {
+public class MainMenu {
 	static CarDAOImpl sdi = new CarDAOImpl();
 	static Scanner scan = new Scanner(System.in);
 	static String username = null;
@@ -32,21 +31,21 @@ public class Menu {
 
 	// Main Menu
 	public static void mainStartMenu() {
-	
+		banner();
 		System.out.println("[C]ustomer Login \n" + "[E]mployee Login \n" + "[N]ew Customer Registration");
 		String mainStart = scan.nextLine();
 		switch (mainStart.toLowerCase()) {
 		case "c":
-//			try {
-//				cdi.newAccount();
-//			} catch (SQLException e) {
-//				System.out.println("Account already exists.");
-//				System.exit(0);
-//			}
-			
+			try {
+				CustomerLogin.customerLogin2();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 			break;
 		case "e":
-			employeeMenu();
+//			employeeMenu();
 
 			break;
 		case "n":
@@ -61,6 +60,15 @@ public class Menu {
 			break;
 		}
 	}
+	
+	public static void customerMenu1() {
+		System.out.println("Please Make A Selection From The Below");
+		System.out.println("1.View Available Cars \n" + "2. Make/View Offers \n" + "3. Current Car Collection  \n"
+				+ "4. Review Payment Balance(s) \n"  + "5.Quit");
+		
+		
+	}
+
 
 	// MAIN EMPLOYEE MENU
 	public static void employeeMenu() {
@@ -93,14 +101,6 @@ public class Menu {
 		}
 	}
 
-	public static void customerMenu1() {
-		System.out.println("Please Make A Selection From The Below");
-		System.out.println("[V]iew Available Cars \n" + "[M]ake/View Offers \n" + "[C]urrent Car Collection  \n"
-				+ "[R]eview Payment Balance(s) \n"  + "[Q]uit");
-		
-	}
-	
-	
 	public static void viewAllCars() {
 		
 		System.out.println("ID      MAKE      MODEL      COLOR      YEAR      MILEAGE      DOOR      TRANS      COST");
@@ -112,33 +112,5 @@ public class Menu {
 		
 		
 	}
-	
-	public static void customerAccounts() {
-		System.out.println("What Would You Like To Do Today?");
-		System.out.println("[S]ee List of All Accounts \n" + "[M]ake A Paymemt \n" + "[O]pen Account");
-		String account = scan.nextLine();
-		switch (account.toLowerCase()) {
-		case "s":
-			CustomerMenu.account();
-			break;
-
-		case "m":
-
-			break;
-			
-		case "o":
-			CustomerMenu.loanAccount();
-
-			break;
-
-		default:
-			System.out.println("Not an option!");
-			System.out.println("Please Select From List Provided!");
-			System.out.println("-------------------------------------");
-			customerAccounts();
-			break;
-		}
-	}
-	
 	
 }

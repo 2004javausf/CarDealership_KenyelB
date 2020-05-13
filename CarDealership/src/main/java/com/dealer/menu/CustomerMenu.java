@@ -1,22 +1,28 @@
 package com.dealer.menu;
 
+import java.awt.Menu;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import com.dealer.beans.Account;
-import com.dealer.beans.NewCustomer;
-import com.dealer.daoimpl.AccountImpl;
-import com.dealer.daoimpl.NewCustomerDAOImpl;
+import com.dealer.daoimpl.AccountDAOImpl;
+import com.dealer.daoimpl.CustomerDAOImpl;
 import com.dealer.daoimpl.OfferDAOImpl;
 
 public class CustomerMenu {
 //	public static String customer;
 	static Scanner scan = new Scanner(System.in);
-	static NewCustomerDAOImpl cdi = new NewCustomerDAOImpl();
 	static OfferDAOImpl odi = new OfferDAOImpl();
-	static AccountImpl adi = new AccountImpl();
+	static CustomerDAOImpl cdi = new CustomerDAOImpl();
+	static AccountDAOImpl adi = new AccountDAOImpl();
 	public static String customer;
 
+	
+	public static void customerAccounts() {
+		System.out.println("What Would You Like To Do Today?");
+		System.out.println("[S]ee List of All Accounts \n" + "[M]ake A Paymemt \n" + "[O]pen Account");
+	}
+	
+	
 	public static void newCustomerReg() {
 		System.out.println("Please Complete The Below To Open An Account");
 		System.out.println("FIRST NAME:");
@@ -28,10 +34,10 @@ public class CustomerMenu {
 		System.out.println("PASSWORD:");
 		String customerPassword = scan.nextLine();
 		try {
-			cdi.insertNewCustomer(customerFname, customerLname, customerUsername, customerPassword);
+			cdi.insertCustomer(customerFname, customerLname, customerUsername, customerPassword);
 			System.out.println(cdi.getcustomerList());
 			System.out.println("Registration Completed");
-			Menu.mainStartMenu();
+			MainMenu.mainStartMenu();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +53,7 @@ public class CustomerMenu {
 			String user = scan.nextLine();
 			try {
 				odi.viewCOfferList(user);
-				Menu.mainStartMenu();
+				MainMenu.mainStartMenu();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -55,7 +61,7 @@ public class CustomerMenu {
 			break;
 		case "m":
 			makeOffer();
-			Menu.customerMenu1();
+			MainMenu.customerMenu1();
 
 			break;
 
@@ -71,16 +77,8 @@ public class CustomerMenu {
 
 
 	public static void account() {
-		try {
-			adi.getCustomerAccount2();
-			System.out.println("......");
-			Menu.customerMenu1();
-			customerMenu2();
-
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		}
+		System.out.println("What Would You Like To Do Today?");
+		System.out.println("[S]ee List of All Accounts \n" + "[M]ake A Paymemt \n" + "[O]pen Account");
 	}
 
 	public static void makeOffer() {
@@ -97,7 +95,7 @@ public class CustomerMenu {
 			odi.insertNewOffer(id, user, offer, status);
 			System.out.println(cdi.getcustomerList());
 			System.out.println("Registration Completed");
-			Menu.mainStartMenu();
+			MainMenu.mainStartMenu();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -122,71 +120,24 @@ public class CustomerMenu {
 		
 		try {
 			adi.insertNewAccount(id, user, loan, terms, monthly);
-			System.out.println(adi.getCustomerAccount2());
 			System.out.println("Registration Completed");
-			Menu.customerMenu1();
-			customerMenu2();
+			MainMenu.customerMenu1();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
 	}
-		
-		
-	
-
-	public static void customerLogin2() {
-		Menu.banner2();
-		try {
-			customer = cdi.login();
-			customerMenu2();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-
-public static void customerMenu2() {
-	String q = null;
-	 String selection = q;
-	 
-	 String menu = scan.nextLine();
-		switch (menu.toLowerCase()) {
-		case "v":
-			Menu.viewAllCars();
-			break;
-
-		case "m":
-			customerOfferMenu();
-
-			break;
-
-		case "c":
-
-			break;
-
-		case "r":
-			Menu.customerAccounts();
-			break;
-
-		case "q":
-			System.out.println("Not an option!");
-			System.out.println("Please Select From List Provided!");
-			System.out.println("-------------------------------------");
-			Menu.customerMenu1();
-			break;
-}
 }
 
-public static void payLoans() {
-	System.out.println("Enter Account#");
-	int account = Integer.parseInt(scan.nextLine());
-	System.out.println("Payment Amount");
-	double payment = Integer.parseInt(scan.nextLine());
-//	balance = 
-}
-}
+
+//public static void payLoans() {
+//	System.out.println("Enter Account#");
+//	int account = Integer.parseInt(scan.nextLine());
+//	System.out.println("Payment Amount");
+//	double payment = Integer.parseInt(scan.nextLine());
+////	balance = 
+//}
+//}
 
 
 //	public static void makePayment(NewCustomer customer, Account acc) {

@@ -1,16 +1,18 @@
 package com.dealer.beans;
 
-public class NewCustomer {
+
+public class Customer {
 	
 	 private String fname;
 	 private String lname;
 	 private String username;
 	 private String password;
-	public NewCustomer() {
+
+	public Customer() {
 		super();
-		// TODO Auto-generated constructor stub
+
 	}
-	public NewCustomer(String fname, String lname, String username, String password) {
+	public Customer(String fname, String lname, String username, String password) {
 		super();
 		this.fname = fname;
 		this.lname = lname;
@@ -43,8 +45,9 @@ public class NewCustomer {
 	}
 	@Override
 	public String toString() {
-		return "newCustomer [fname=" + fname + ", lname=" + lname + ", username=" + username + ", password=" + password
+		return "Customer [fname=" + fname + ", lname=" + lname + ", username=" + username + ", password=" + password
 				+ "]";
 	}
+
 
 }
