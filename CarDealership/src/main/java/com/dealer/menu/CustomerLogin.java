@@ -34,7 +34,9 @@ public class CustomerLogin {
 			int selection11 = Integer.parseInt(scan.nextLine());
 			switch (selection11) {
 			case 1:
-//				Menu.viewAllCars();
+				MainMenu.viewAllCars();
+				System.out.println("_______________________________________________________________________________________________");
+				MainMenu.customerMenu1();
 				break;
 
 			case 2:
@@ -43,11 +45,10 @@ public class CustomerLogin {
 				switch (offer.toLowerCase()) {
 				case "c":
 					System.out.printf("%-4s%-10s%-11s%-13s%-11s%-11s%-10s\n","", "OFFER ID", "CAR ID", "$ OFFER","STATUS", "MAKE", "MODEL");
-					System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
 					try {
 						
 						odi.customerOfferList(customer);
-						
+						System.out.println(("_______________________________________________________________________________________________"));
 						MainMenu.customerMenu1();
 					} catch (SQLException e) {
 						e.printStackTrace();
@@ -55,6 +56,7 @@ public class CustomerLogin {
 
 					break;
 				case "m":
+					MainMenu.viewAllCars();
 					CustomerMenu.makeOffer();
 					MainMenu.customerMenu1();
 
@@ -64,7 +66,7 @@ public class CustomerLogin {
 					System.out.println("Not an option!");
 					System.out.println("Please Select From List Provided!");
 					System.out.println("-------------------------------------");
-					CustomerMenu.customerOfferMenu();
+					MainMenu.customerMenu1();
 					break;
 				}
 
@@ -80,13 +82,16 @@ public class CustomerLogin {
 				switch (account.toLowerCase()) {
 				case "s":
 					adi.getCustomerAccount(customer);
+					CustomerMenu.customerAccounts();
 					break;
 				case "m":
 
 					break;
 				case "o":
+					System.out.printf("%-4s%-10s%-11s%-13s%-11s%-11s%-10s\n","", "OFFER ID", "CAR ID", "$ OFFER","STATUS", "MAKE", "MODEL");
 					odi.customerOfferList(customer);
-					CustomerMenu.loanAccount();
+						CustomerMenu.loanAccount();
+
 
 					break;
 				default:

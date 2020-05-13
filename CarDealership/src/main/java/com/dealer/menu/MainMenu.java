@@ -68,6 +68,7 @@ public class MainMenu {
 				+ "4. Review Payment Balance(s) \n"  + "5.Quit");
 		
 		
+		
 	}
 
 
@@ -75,31 +76,7 @@ public class MainMenu {
 	public static void employeeMenu() {
 
 		System.out.println("Please Make A Selection From The Below.");
-		System.out.println("[A]dd Car To Lot \n" + "[R]emove Car From Lot \n" + "[P]ending Offers \n"
-				+ "[V]iew Customer Payments \n" + "[C]urrent Cars On Lot");
-		String menu = scan.nextLine();
-		switch (menu.toLowerCase()) {
-		case "a":
-			EmployeeMenu.addCarToLot();
-			break;
-		case "r":
-			EmployeeMenu.removeCar();
-			break;
-		case "p":
-
-			break;
-		case "v":
-
-			break;
-		case "c":
-			viewAllCars();
-			break;
-		default:
-			System.out.println("Not an option!");
-			System.out.println("Please Select From List Provided!");
-			System.out.println("-------------------------------------");
-			employeeMenu();
-		}
+		EmployeeMenu.employeeOptions();
 	}
 
 	public static void viewAllCars() {

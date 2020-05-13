@@ -50,12 +50,13 @@ public class CustomerMenu {
 	}
 
 
-	public static void account() {
-		System.out.println("What Would You Like To Do Today?");
-		System.out.println("[S]ee List of All Accounts \n" + "[O]pen Account");
-	}
+//	public static void account() {
+//		System.out.println("What Would You Like To Do Today?");
+//		System.out.println("[S]ee List of All Accounts \n" + "[O]pen Account");
+//	}
 
 	public static void makeOffer() {
+		MainMenu.viewAllCars();
 		System.out.println("Please Compelete The Below");
 		System.out.println("Car ID#:");
 		int id = Integer.parseInt(scan.nextLine());
@@ -67,14 +68,12 @@ public class CustomerMenu {
 
 		try {
 			odi.insertNewOffer(id, user, offer, status);
-			System.out.println(cdi.getcustomerList());
-			System.out.println("Registration Completed");
+			System.out.println("Offer has been sent");
+
 			MainMenu.mainStartMenu();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		System.out.println("Offer has been sent");
 	}
 
 	public static void loanAccount() {

@@ -1,6 +1,7 @@
 	package com.dealer.daoimpl;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,17 +18,24 @@ public class CarDAOImpl implements CarDAO {
 	public static ConnDatabase cd = ConnDatabase.getInstance();
 
 	
-	public void insertCar(int CAR_TYPE_ID, String CAR_TYPE_MAKE, String CAR_TYPE_MODEL, String CAR_TYPE_COLOR,
+	public void insertCar(String CAR_TYPE_MAKE, String CAR_TYPE_MODEL, String CAR_TYPE_COLOR,
 			int CAR_TYPE_YEAR, int CAR_TYPE_MILEAGE, String CAR_TYPE_TRANSMISSION, String CAR_TYPE_DOOR,
 			double CAR_TYPE_COST, String CAR_TYPE_OWNED) throws SQLException {
 		Connection conn = cd.getConnection();
-		Statement stmt = conn.createStatement();
-		String carSql = "INSERT INTO CAR_TYPE VALUES(" + CAR_TYPE_ID + " , '" + CAR_TYPE_MAKE + "','" + CAR_TYPE_MODEL
-				+ "','" + CAR_TYPE_COLOR + "'," + CAR_TYPE_YEAR + " , " + CAR_TYPE_MILEAGE + ",'"
-				+ CAR_TYPE_TRANSMISSION + "','" + CAR_TYPE_DOOR + "' ," + CAR_TYPE_COST + ", '" + CAR_TYPE_OWNED + "')";
-		stmt.executeUpdate(carSql);
-
-	}
+		String sql= "INSERT INTO OFFER VALUES (IDSEQ.NEXTVAL,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement ps=conn.prepareStatement(sql);
+		ps.setString(1, CAR_TYPE_MAKE);
+		ps.setString(2, CAR_TYPE_MODEL);
+		ps.setString(3, CAR_TYPE_COLOR);
+		ps.setInt(4, CAR_TYPE_YEAR);
+		ps.setInt(5, CAR_TYPE_MILEAGE);
+		ps.setString(6, CAR_TYPE_TRANSMISSION);
+		ps.setString(7, CAR_TYPE_DOOR);
+		ps.setDouble(8, CAR_TYPE_COST);
+		ps.setString(9, CAR_TYPE_OWNED);
+		ps.executeUpdate();
+	};
+	
 	
 	public void deleteCar(int CAR_TYPE_ID) throws SQLException {
 		Connection conn = cd.getConnection();
@@ -67,6 +75,14 @@ public class CarDAOImpl implements CarDAO {
 		}
 //		
 		return scarList;
+		
+	}
+
+
+	@Override
+	public void insertCar(int id, String make, String model, String color, int year, int mileage, String door,
+			String transmission, double cost, String owned) throws SQLException {
+		// TODO Auto-generated method stub
 		
 	}
 

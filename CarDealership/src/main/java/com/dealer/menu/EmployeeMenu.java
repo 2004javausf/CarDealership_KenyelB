@@ -40,24 +40,27 @@ public class EmployeeMenu {
 	}
 	
 	public static void employeeOptions() {
-		System.out.println("[V]iew Cars On Lot" + "[A]DD CARS TO LOT \n" + "[R]EMOVE CARS FROM LOT \n"+ "[C]USTOMER ACCOUNTS \n" + "[O]FFERS \n" + "[Q]uit");
+		System.out.println("[V]iew Cars On Lot \n" + "[A]DD CARS TO LOT \n" + "[R]EMOVE CARS FROM LOT \n"+ "[C]USTOMER ACCOUNTS \n" + "[O]FFERS \n" + "[Q]uit");
 		String selection = scan.nextLine();
 		switch (selection.toLowerCase()) {
 		case "v":
 			MainMenu.viewAllCars();
+			employeeOptions();
 			break;
 		case "a":
 			addCarToLot();
+			employeeOptions();
 			break;
 
 		case "r":
 			removeCar();
+			employeeOptions();
 			break;
 		case "c":
 			viewCustomerAccount();
+			employeeOptions();
 			break;
 		case "o":
-			System.out.println("Logged Out");
 			viewofferList();
 			System.out.println("Would You Like to [A]pprove or [D] Offer");
 			String select= scan.nextLine();
@@ -69,14 +72,13 @@ public class EmployeeMenu {
 				denyoffer();
 				break;
 				}
-			
+			employeeOptions();
 			break;
 			case "q":
 			System.out.println("Logged Out");
 			MainMenu.mainStartMenu();
 			break;
 		default:
-			System.out.println("Please Choose From Selection");
 			employeeOptions();
 			break;
 		}
@@ -85,8 +87,6 @@ public class EmployeeMenu {
 	
 	public static void addCarToLot() {
 		System.out.println("Please Complete Below To Add Car");
-		System.out.println("Car ID");
-		int id = Integer.parseInt(scan.nextLine());
 		System.out.println("Make:");
 		String make = scan.nextLine();
 		System.out.println("Model:");
@@ -106,7 +106,7 @@ public class EmployeeMenu {
 		System.out.println("Owned:");
 		String owned = scan.nextLine();
 			try {
-			sdi.insertCar(id, make, model, color, year, mileage,door, trans, cost, owned);
+			sdi.insertCar(make, model, color, year, mileage,door, trans, cost, owned);
 			System.out.println(sdi.getcarList());
 		} catch (SQLException e) {
 			e.printStackTrace();
