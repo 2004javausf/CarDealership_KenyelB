@@ -55,15 +55,23 @@ public class OfferDAOImpl implements OfferDAO {
 		return viewofferList;
 	}
 	
-	public List<Offer>viewCOfferList(Customer customer) throws SQLException{
-		List<Offer> viewofferList = new ArrayList<Offer>();
+	public void customerOfferList(Customer customer) throws SQLException{
+		List<Offer> customerOfferList = new ArrayList<Offer>();
+		OfferDAOImpl offdi = new OfferDAOImpl();
+		String cus = customer.getUsername();
 		Connection conn = cd.getConnection();
 		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("SELECT * FROM OFFER, CAR_TYPE WHERE  O_UNAME = '" + C_UNAME+ "' AND CAR_TYPE_ID = O_CAR_ID");
+		ResultSet rs = stmt.executeQuery("SELECT OFFER.*, CAR_TYPE.CAR_TYPE_MAKE, CAR_TYPE.CAR_TYPE_MODEL, CAR_TYPE.CAR_TYPE_COLOR\r\n" + 
+				"FROM OFFER\r\n" + 
+				"inner JOIN CAR_TYPE\r\n" + 
+				"ON OFFER.O_UNAME = '" +cus+"' AND OFFER.O_CAR_ID= CAR_TYPE.CAR_TYPE_ID\r\n");
+//		Offer o;
 		while(rs.next()) {
-			System.out.printf("%-4s%-11s%-9s%-11s%-1s%-16s%-10s%-11s%-11s%-10s\n","", rs.getInt(1),  rs.getInt(2), rs.getString(3), "$" ,rs.getInt(4), rs.getString(8), rs.getString(6), rs.getString(7), rs.getString(5));
+//			o = new Offer(rs.getInt(1),  rs.getInt(2), rs.getString(3), "$" ,rs.getInt(4), rs.getString(8), rs.getString(6), rs.getString(7), rs.getString(5));
+			
+			System.out.printf("%-4s%-10s%-10s%-1s%-12s%-12s%-10s\n","", rs.getInt(1),  rs.getInt(2), "$" ,rs.getInt(4), rs.getString(5),  rs.getString(6), rs.getString(7));
 		}
-		return viewCOfferList;
+		return;
 		
 	}
 	

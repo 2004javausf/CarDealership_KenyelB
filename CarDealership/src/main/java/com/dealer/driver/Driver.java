@@ -7,6 +7,7 @@ import com.dealer.daoimpl.CustomerDAOImpl;
 import com.dealer.menu.CustomerLogin;
 import com.dealer.menu.CustomerMenu;
 import com.dealer.menu.EmployeeMenu;
+import com.dealer.menu.MainMenu;
 
 public class Driver {
 
@@ -26,19 +27,19 @@ public class Driver {
 //			} catch (Exception e) {
 //				// TODO: handle exception
 //			}
-			 try {
-						 adi.getAccount();
-//						 System.out.println(adi.getAccount());
-				cdi.getcustomerList();
-//				System.out.println(cdi.getcustomerList());
-				CustomerLogin.customerLogin2();
-//				System.out.println(cdi.getcustomerList());
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			 try {
+//						 adi.getAccount();
+////						 System.out.println(adi.getAccount());
+//				cdi.getcustomerList();
+////				System.out.println(cdi.getcustomerList());
+//				CustomerLogin.customerLogin2();
+////				System.out.println(cdi.getcustomerList());
+//			} catch (SQLException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
-			 
+			MainMenu.mainStartMenu(); 
 		}
 
 	}

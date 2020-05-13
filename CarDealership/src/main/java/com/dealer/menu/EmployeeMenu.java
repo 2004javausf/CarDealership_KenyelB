@@ -6,13 +6,82 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.dealer.beans.Cars;
+import com.dealer.daoimpl.AccountDAOImpl;
 import com.dealer.daoimpl.CarDAOImpl;
 import com.dealer.daoimpl.OfferDAOImpl;
+import com.dealer.util.LogThis;
 
 public class EmployeeMenu {
 	static Scanner scan = new Scanner(System.in);
 	static CarDAOImpl sdi = new CarDAOImpl();
 	static OfferDAOImpl odi = new OfferDAOImpl();
+	static AccountDAOImpl adi = new AccountDAOImpl();
+	
+	
+	public static void employeeLogin() {
+
+		String userEmploy = "JackJill";
+		String passEmploy = "uphill";
+		System.out.println("Welcome to Employee Portal");
+		System.out.println("Please Enter Username and Password");
+		System.out.println("Username:");
+		String employUsername = scan.nextLine();
+		System.out.println("Password:");
+		String employPassword = scan.nextLine();
+		if (userEmploy.equals(employUsername) && passEmploy.equals(employPassword)) {
+			System.out.println("Welcome " + userEmploy);
+			MainMenu.employeeMenu();
+			LogThis.LogIt("info", userEmploy + "logged-in");
+			// WILL DIRECT TO EMPLOYEE PORTAL
+		} else {
+			System.out.println("Wrong Username/Password, Please try again");
+			employeeLogin();
+		}
+	}
+	
+	public static void employeeOptions() {
+		System.out.println("[V]iew Cars On Lot" + "[A]DD CARS TO LOT \n" + "[R]EMOVE CARS FROM LOT \n"+ "[C]USTOMER ACCOUNTS \n" + "[O]FFERS \n" + "[Q]uit");
+		String selection = scan.nextLine();
+		switch (selection.toLowerCase()) {
+		case "v":
+			MainMenu.viewAllCars();
+			break;
+		case "a":
+			addCarToLot();
+			break;
+
+		case "r":
+			removeCar();
+			break;
+		case "c":
+			viewCustomerAccount();
+			break;
+		case "o":
+			System.out.println("Logged Out");
+			viewofferList();
+			System.out.println("Would You Like to [A]pprove or [D] Offer");
+			String select= scan.nextLine();
+			switch (select.toLowerCase()) {
+			case "a":
+				approveDenyOffer();
+				break;
+			case "d":
+				denyoffer();
+				break;
+				}
+			
+			break;
+			case "q":
+			System.out.println("Logged Out");
+			MainMenu.mainStartMenu();
+			break;
+		default:
+			System.out.println("Please Choose From Selection");
+			employeeOptions();
+			break;
+		}
+	}
+
 	
 	public static void addCarToLot() {
 		System.out.println("Please Complete Below To Add Car");
@@ -45,7 +114,7 @@ public class EmployeeMenu {
 	}
 	
 	public static void removeCar() {
-		Menu.viewAllCars();
+		MainMenu.viewAllCars();
 		System.out.println("Please Select ID # Car You Wish To Remove");
 		System.out.println("Car ID");
 		int id = Integer.parseInt(scan.nextLine());
@@ -55,7 +124,7 @@ public class EmployeeMenu {
 			e.printStackTrace();
 		}
 		System.out.println("Updated Car List.");
-		Menu.viewAllCars();
+		MainMenu.viewAllCars();
 		
 	}
 
@@ -82,7 +151,7 @@ public class EmployeeMenu {
 			e.printStackTrace();
 		}
 		
-		
+		employeeOptions();
 	}
 	
 	public static void denyoffer() {
@@ -93,8 +162,22 @@ public class EmployeeMenu {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		employeeOptions();
 	}
 	
+	public static void  viewCustomerAccount() {
+		
+		System.out.println("Enter Customer UserName");
+		String user = scan.nextLine();
+		try {
+			adi.customerAccount(user);
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
 	}
 
 

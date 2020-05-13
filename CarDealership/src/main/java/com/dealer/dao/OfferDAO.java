@@ -3,6 +3,7 @@ package com.dealer.dao;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.dealer.beans.Customer;
 import com.dealer.beans.Offer;
 
 public interface OfferDAO {
@@ -12,4 +13,5 @@ public interface OfferDAO {
 	public List<Offer>getofferList() throws SQLException;
 	public List<Offer>viewofferList() throws SQLException;
 //	public List<Offer>viewCOfferList() throws SQLException;
+	public void customerOfferList(Customer customer) throws SQLException;
 }

@@ -6,11 +6,14 @@ import java.util.Scanner;
 import com.dealer.beans.Customer;
 import com.dealer.daoimpl.AccountDAOImpl;
 import com.dealer.daoimpl.CustomerDAOImpl;
+import com.dealer.daoimpl.OfferDAOImpl;
+import com.dealer.util.LogThis;
 
 public class CustomerLogin {
 		static Scanner scan = new Scanner(System.in);
 		static CustomerDAOImpl cdi = new CustomerDAOImpl();
 		static AccountDAOImpl adi = new AccountDAOImpl();
+		static OfferDAOImpl odi = new OfferDAOImpl();
 
 		public static void customerLogin2() throws SQLException {
 			MainMenu.banner2();
@@ -23,6 +26,7 @@ public class CustomerLogin {
 		System.out.println("Password:");
 		password = scan.nextLine();
 		Customer customer = cdi.login2(user, password);
+		LogThis.LogIt("info", customer.getUsername()+"logged-in");
 		System.out.println("Welcome Back " + customer.getFname());
 		MainMenu.customerMenu1();
 		int selection1 = 0;
@@ -34,7 +38,35 @@ public class CustomerLogin {
 				break;
 
 			case 2:
-//				customerOfferMenu();
+				CustomerMenu.customerOfferMenu();
+				String offer = scan.nextLine();
+				switch (offer.toLowerCase()) {
+				case "c":
+					System.out.printf("%-4s%-10s%-11s%-13s%-11s%-11s%-10s\n","", "OFFER ID", "CAR ID", "$ OFFER","STATUS", "MAKE", "MODEL");
+					System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+					try {
+						
+						odi.customerOfferList(customer);
+						
+						MainMenu.customerMenu1();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+
+					break;
+				case "m":
+					CustomerMenu.makeOffer();
+					MainMenu.customerMenu1();
+
+					break;
+
+				default:
+					System.out.println("Not an option!");
+					System.out.println("Please Select From List Provided!");
+					System.out.println("-------------------------------------");
+					CustomerMenu.customerOfferMenu();
+					break;
+				}
 
 				break;
 
@@ -53,7 +85,8 @@ public class CustomerLogin {
 
 					break;
 				case "o":
-//					CustomerMenu.loanAccount();
+					odi.customerOfferList(customer);
+					CustomerMenu.loanAccount();
 
 					break;
 				default:

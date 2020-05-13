@@ -12,6 +12,7 @@ import com.dealer.beans.Account;
 import com.dealer.beans.Customer;
 import com.dealer.dao.AccountDAO;
 import com.dealer.util.ConnDatabase;
+import com.dealer.util.LogThis;
 
 public class AccountDAOImpl implements AccountDAO {
 	
@@ -40,12 +41,19 @@ public class AccountDAOImpl implements AccountDAO {
 		while (rs.next()) {
 			a = new Account(rs.getInt(2),rs.getInt(1), rs.getString(3),rs.getInt(4),rs.getInt(5), rs.getDouble(6));
 			getAccount.add(a);
+			LogThis.LogIt("info", a.getUsername()+"viewed account");
 			
 		}
 		return getAccount;
 		
 	}
 	
+	public void customerAccount(String user) throws SQLException {
+		Connection conn = cd.getConnection();
+		Statement stmt = conn.createStatement();
+		String sql ="DELETE FROM Account \r\n" + 
+				"WHERE O_UNAME = ('" + user +"')";
+	}
 	
 	public void getCustomerAccount(Customer customer) throws SQLException {
 		AccountDAOImpl acctdi = new AccountDAOImpl();
@@ -58,10 +66,16 @@ public class AccountDAOImpl implements AccountDAO {
 		while(rs.next()) {	
 			a = new Account(rs.getInt(2), 0, rs.getString(3),rs.getInt(4),rs.getInt(5), rs.getDouble(6));
 			getAccount.add(a);
+			LogThis.LogIt("info", a.getUsername()+"viewed account");
 			System.out.printf("%-10s%-11s%-11s%-11s%-10s\n", "Accout #", "Car ID", "Loan Balance", "Loan Terms", "Monthly Payment");
 			System.out.printf("%-11s%-11s%-11s%-11s%-10s\n", rs.getInt(1), rs.getInt(2),rs.getInt(4), rs.getInt(5), rs.getDouble(6));
 		}
 		return;
+		
+	}
+
+	public void getCustomerAccount(String user) {
+		// TODO Auto-generated method stub
 		
 	}
 

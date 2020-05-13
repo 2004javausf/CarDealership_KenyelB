@@ -45,7 +45,8 @@ public class MainMenu {
 		
 			break;
 		case "e":
-//			employeeMenu();
+			EmployeeMenu.employeeLogin();
+			
 
 			break;
 		case "n":

@@ -4,6 +4,7 @@ import java.awt.Menu;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import com.dealer.beans.Customer;
 import com.dealer.daoimpl.AccountDAOImpl;
 import com.dealer.daoimpl.CustomerDAOImpl;
 import com.dealer.daoimpl.OfferDAOImpl;
@@ -14,7 +15,7 @@ public class CustomerMenu {
 	static OfferDAOImpl odi = new OfferDAOImpl();
 	static CustomerDAOImpl cdi = new CustomerDAOImpl();
 	static AccountDAOImpl adi = new AccountDAOImpl();
-	public static String customer;
+	public static Customer customer;
 
 	
 	public static void customerAccounts() {
@@ -46,39 +47,12 @@ public class CustomerMenu {
 	public static void customerOfferMenu() {
 		System.out.println("What Would You Like To Do Today?");
 		System.out.println("[C]urrent Offers \n" + "[M]ake Offer");
-		String offer = scan.nextLine();
-		switch (offer.toLowerCase()) {
-		case "c":
-			System.out.println("Enter Username");
-			String user = scan.nextLine();
-			try {
-				odi.viewCOfferList(user);
-				MainMenu.mainStartMenu();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-
-			break;
-		case "m":
-			makeOffer();
-			MainMenu.customerMenu1();
-
-			break;
-
-		default:
-			System.out.println("Not an option!");
-			System.out.println("Please Select From List Provided!");
-			System.out.println("-------------------------------------");
-			customerOfferMenu();
-			break;
-		}
-
 	}
 
 
 	public static void account() {
 		System.out.println("What Would You Like To Do Today?");
-		System.out.println("[S]ee List of All Accounts \n" + "[M]ake A Paymemt \n" + "[O]pen Account");
+		System.out.println("[S]ee List of All Accounts \n" + "[O]pen Account");
 	}
 
 	public static void makeOffer() {
@@ -120,7 +94,7 @@ public class CustomerMenu {
 		
 		try {
 			adi.insertNewAccount(id, user, loan, terms, monthly);
-			System.out.println("Registration Completed");
+			System.out.println("Account Created");
 			MainMenu.customerMenu1();
 		} catch (SQLException e) {
 			e.printStackTrace();
